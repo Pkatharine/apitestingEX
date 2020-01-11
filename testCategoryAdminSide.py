@@ -38,8 +38,9 @@ class testCategoryAdminSide(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.conn = Connection()
-        cls.conn.delete_user_with_email("katya@gmail.com")
-        cls.conn.close()
+        pass
+#         cls.conn = Connection()
+#         cls.conn.delete_user_with_email("katya@gmail.com")
+#         cls.conn.close()
 if __name__ == '__main__':
     unittest.main()
