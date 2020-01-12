@@ -27,7 +27,7 @@ class testCategoryAdminSide(unittest.TestCase):
         self.assertEqual(200, response_decoded_json.status_code)
 
     def test_category_edit_sea(self):
-        payload = {"Id": "1f8fc9d7-880c-4642-b838-08d794641531", "Name": "Sea1"}
+        payload = {"Id": "F535A1D6-EEC4-4697-B4AD-08D7858FCA63", "Name": "MountNew"}
         response_decoded_json = requests.post(self.url_category_edit, data=json.dumps(payload), headers=self.header)
         self.assertEqual(200, response_decoded_json.status_code)
 
@@ -38,9 +38,10 @@ class testCategoryAdminSide(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        pass
-#         cls.conn = Connection()
-#         cls.conn.delete_user_with_email("katya@gmail.com")
-#         cls.conn.close()
+        cls.conn = Connection()
+        cls.conn.delete_category_with_name("new")
+        cls.conn.edit_category_with_name("MountNew", "Mount")
+        cls.conn.close()
+
 if __name__ == '__main__':
     unittest.main()
