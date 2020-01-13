@@ -2,7 +2,7 @@ import json
 import unittest
 import requests
 from dbconnection import Connection
-from testHelper import UrlAuth, Header, AuthPayloads
+from tests.testHelper import UrlAuth, Header, AuthPayloads
 
 
 class TestAuth(unittest.TestCase):

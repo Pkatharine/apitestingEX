@@ -1,7 +1,7 @@
 import json
 import unittest
 import requests
-from testHelper import Header, UrlCategory, CategoryPayloads
+from tests.testHelper import Header, UrlCategory, CategoryPayloads
 from dbconnection import Connection
 
 
