@@ -1,4 +1,5 @@
 import json
+import uuid
 
 import pyodbc as pyodbc
 import requests
@@ -11,12 +12,12 @@ class Connection:
         self.database = 'EventsExpress'
         self.username = 'katya'
         self.password = 'Popalava09'
-        self.driver= 'ODBC Driver 17 for SQL Server'
-        self.conn = pyodbc.connect('DRIVER='+self.driver+
-                                   ';SERVER='+self.server+
-                                   ';PORT=1433;DATABASE='+self.database+
-                                   ';UID='+self.username+
-                                   ';PWD='+ self.password)
+        self.driver = 'ODBC Driver 17 for SQL Server'
+        self.conn = pyodbc.connect('DRIVER=' + self.driver +
+                                   ';SERVER=' + self.server +
+                                   ';PORT=1433;DATABASE=' + self.database +
+                                   ';UID=' + self.username +
+                                   ';PWD=' + self.password)
         self.cursor = self.conn.cursor()
 
     def delete_user_with_email(self, name):
@@ -28,10 +29,20 @@ class Connection:
         self.cursor.commit()
 
     def edit_category_with_name(self, name, set):
-        self.cursor.execute("Update Categories set Name = ? where Name like ?", (set,name))
+        self.cursor.execute("Update Categories set Name = ? where Name like ?", (set, name))
         self.cursor.commit()
+
+    def create_category_with_name(self, name):
+        guid = uuid.uuid4()
+        self.cursor.execute("INSERT INTO Categories(Id, Name) VALUES (?,?);", (guid,name))
+        self.cursor.commit()
+
+    def get_id_using_name(self, name):
+        self.cursor.execute("select Id from Categories where Name = ?", name)
+        return str(self.cursor.fetchone())
+        # self.cursor.commit()
+        # return self.cursor.fetchone()
 
 
     def close(self):
         self.conn.close()
-
