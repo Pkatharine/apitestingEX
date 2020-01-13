@@ -6,6 +6,8 @@ import requests
 class UrlAuth:
     url_login = "https://eventsexpress20200103054152.azurewebsites.net/api/Authentication/Login"
     url_register = "https://eventsexpress20200103054152.azurewebsites.net/api/Authentication/Register"
+    url_login_fb = "https://eventsexpress20200103054152.azurewebsites.net/api/Authentication/FacebookLogin"
+    url_login_google = "https://eventsexpress20200103054152.azurewebsites.net/api/Authentication/google"
 
 
 class UrlCategory:
@@ -28,6 +30,15 @@ class Header:
 
     def get_header_auth_admin(self):
         response_decoded_json = requests.post(UrlAuth.url_login, data=json.dumps(AuthPayloads.payload_admin),
+                                              headers=Header.header)
+        h = json.loads(response_decoded_json.content.decode())
+        auth = h["token"]
+        header = {"accept": "application/json", "Content-Type": "application/json-patch+json",
+                  "authorization": "Bearer " + auth}
+        return header
+
+    def get_header_auth_user(self):
+        response_decoded_json = requests.post(UrlAuth.url_login, data=json.dumps(AuthPayloads.payload_user),
                                               headers=Header.header)
         h = json.loads(response_decoded_json.content.decode())
         auth = h["token"]
