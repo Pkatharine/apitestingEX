@@ -40,9 +40,6 @@ class Connection:
     def get_id_using_name(self, name):
         self.cursor.execute("select Id from Categories where Name = ?", name)
         return str(self.cursor.fetchone())
-        # self.cursor.commit()
-        # return self.cursor.fetchone()
-
 
     def close(self):
         self.conn.close()
