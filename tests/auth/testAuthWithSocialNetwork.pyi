@@ -11,7 +11,6 @@ class TestAuth(unittest.TestCase):
     def setUpClass(cls):
         pass
 
-    @allure.suite('Tests for "Contact us page"')
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.link("https://eventsexpress20200103054152.azurewebsites.net/home/events?page=1", name='Click me')
     @allure.story('Test loging with Facebook as user')
