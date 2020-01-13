@@ -19,7 +19,7 @@ class testCategoryAdminSide(unittest.TestCase):
         h = json.loads(response_decoded_json.content.decode())
         cls.auth = h["token"]
         cls.header = {"accept": "application/json", "Content-Type": "application/json-patch+json",
-                      "authorization": "Bearer "+cls.auth}
+                      "authorization": "Bearer " + cls.auth}
 
     def test_category_get_all(self):
         response_decoded_json = requests.get(self.url_category_all, headers=self.header)
@@ -42,6 +42,7 @@ class testCategoryAdminSide(unittest.TestCase):
         cls.conn.delete_category_with_name("new")
         cls.conn.edit_category_with_name("MountNew", "Mount")
         cls.conn.close()
+
 
 if __name__ == '__main__':
     unittest.main()
